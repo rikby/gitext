@@ -3,7 +3,7 @@
     "description": "",
     "license": "MIT",
     "require": {
-        "andkirby/console-helper": "~0.8 @stable"
+        "andkirby/console-helper": "~0.8@stable"
     },
     "require-dev": {
         "escapestudios/symfony2-coding-standard": "~2.0"
