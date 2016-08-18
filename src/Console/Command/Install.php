@@ -37,6 +37,21 @@ class Install extends AbstractCommand
     }
 
     /**
+     * Get shell helper
+     *
+     * @return ShellHelper
+     */
+    public function getShellHelper()
+    {
+        if (!$this->getHelperSet()->has('shell')) {
+            $this->getHelperSet()->set(new ShellHelper());
+            $this->getHelperSet()->get('shell')->setOutput($this->output);
+        }
+
+        return $this->getHelperSet()->get('shell');
+    }
+
+    /**
      * Get commands list
      *
      * @return mixed
@@ -45,11 +60,11 @@ class Install extends AbstractCommand
     {
         return [
             'git tags'       => sprintf(
-                trim(file_get_contents(realpath(__DIR__ . '/../../shell/command/git-tags'))),
-                realpath(__DIR__ . '/../../shell/version-sort.php')
+                trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tags'))),
+                str_replace('\\', '/', realpath(__DIR__.'/../../shell/version-sort.php'))
             ),
-            'git tag-move'   => trim(file_get_contents(realpath(__DIR__ . '/../../shell/command/git-tag-move'))),
-            'git tag-remove' => trim(file_get_contents(realpath(__DIR__ . '/../../shell/command/git-tag-remove'))),
+            'git tag-move'   => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-move'))),
+            'git tag-remove' => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-remove'))),
         ];
     }
 
@@ -66,26 +81,12 @@ class Install extends AbstractCommand
     }
 
     /**
-     * Get shell helper
-     *
-     * @return ShellHelper
-     */
-    public function getShellHelper()
-    {
-        if (!$this->getHelperSet()->has('shell')) {
-            $this->getHelperSet()->set(new ShellHelper());
-            $this->getHelperSet()->get('shell')->setOutput($this->output);
-        }
-
-        return $this->getHelperSet()->get('shell');
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function configureCommand()
     {
         $this->setName('install');
+// @codingStandardsIgnoreStart
         $this->setHelp(
             <<<TXT
 Install extra GIT commands. It will set
@@ -93,11 +94,10 @@ Install extra GIT commands. It will set
   - git tag-move (Command which moves a tag to last commit. It will move it on "origin" as well)
   - git tag-remove (Command which removes a tag to last commit. It will remove it on "origin" as well)
 TXT
-
         );
+// @codingStandardsIgnoreEnd
         $this->setDescription(
             'Install extra GIT commands.'
         );
     }
-
 }
