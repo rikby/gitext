@@ -1,4 +1,18 @@
 # GitExt: Git extra commands
+## Installation
+Get package via composer:
+```
+$ composer global require rikby/gitext ^0.2
+```
+And install commands:
+```
+$ gitext install
+```
+
+#### Inside
+Please take a look command files which use for installation [in list](src/shell/command).
+
+## Using
 ### Commands list
 There are commands:
 ##### Sort tags
@@ -24,15 +38,3 @@ Define `gitflow` settings based upon branch namespace.
 This command will be useful within [multi composer repository](../../../../andkirby/multi-repo-composer) repository.
 
 A namespace will be set automatically by branch name.
-### Installation
-Get package via composer:
-```
-$ composer global require rikby/gitext ^0.2
-```
-And install commands:
-```
-$ gitext install
-```
-
-#### Inside
-Please take a look command files which use for installation [in list](src/shell/command).
