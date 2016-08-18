@@ -1,1 +1,1 @@
-git config --global alias.tags "!git tag-remove $1 && git tag $1 && git push --tags; echo > /dev/null"
+git config --global alias.tag-move "!git tag-remove $1 && git tag $1 && git push --tags; echo > /dev/null"
