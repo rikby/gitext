@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8d61df650611a01b1a8d844da2f4a63b",
-    "content-hash": "1ffc6b33d1b2a119c2505ea6a51c7a72",
+    "hash": "8b739660c4e22780fd55ed3e8d11670a",
+    "content-hash": "125baebf25c6866eaa591a171dd8e6ea",
     "packages": [
         {
             "name": "andkirby/console-helper",
@@ -39,53 +39,6 @@
             ],
             "description": "Symfony console helpers.",
             "time": "2016-08-18 14:15:36"
-        },
-        {
-            "name": "naneau/semver",
-            "version": "0.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/naneau/semver.git",
-                "reference": "60ea59641aad840f97f3c9057e2f2b7bc087eaa3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/naneau/semver/zipball/60ea59641aad840f97f3c9057e2f2b7bc087eaa3",
-                "reference": "60ea59641aad840f97f3c9057e2f2b7bc087eaa3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Naneau\\SemVer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maurice Fonk",
-                    "email": "maurice@naneau.net",
-                    "homepage": "http://mauricefonk.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "A decent, standards-compliant, Semantic Versioning (SemVer) parser and library",
-            "homepage": "https://github.com/naneau/semver",
-            "keywords": [
-                "semantic",
-                "semver",
-                "versioning"
-            ],
-            "time": "2013-01-04 00:00:00"
         },
         {
             "name": "symfony/console",
@@ -336,8 +289,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "andkirby/console-helper": 0,
-        "naneau/semver": 0
+        "andkirby/console-helper": 0
     },
     "prefer-stable": false,
     "prefer-lowest": false,
