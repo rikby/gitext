@@ -21,7 +21,7 @@ git flow-namespace
 ```
 Define `gitflow` settings based upon branch namespace.
 
-This command will be useful within [multi composer repository](../../../andkirby/multi-repo-composer) repository.
+This command will be useful within [multi composer repository](../../../../andkirby/multi-repo-composer) repository.
 
 A namespace will be set automatically by branch name.
 ### Installation
