@@ -1,0 +1,20 @@
+{
+    "name": "rikby/gitext",
+    "description": "",
+    "license": "MIT",
+    "require": {
+        "andkirby/console-helper": "^0.8@stable",
+        "naneau/semver": "@stable"
+    },
+    "require-dev": {
+        "escapestudios/symfony2-coding-standard": "~2.0"
+    },
+    "bin": [
+        "bin/gitext"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rikby\\GitExt\\": "src/"
+        }
+    }
+}
