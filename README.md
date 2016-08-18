@@ -19,7 +19,7 @@ Move a Git tag to a current commit locally and on remote "origin" (requires `git
 ### Installation
 Get package via composer:
 ```
-$ composer global require rikby/gitext ^0.1
+$ composer global require rikby/gitext ^0.2
 ```
 And install commands:
 ```
