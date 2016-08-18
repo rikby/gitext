@@ -2,7 +2,7 @@
 ## Installation
 Get package via composer:
 ```
-$ composer global require rikby/gitext ^0.2
+$ composer global require rikby/gitext ^0.3
 ```
 And install commands:
 ```
