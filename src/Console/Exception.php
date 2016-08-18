@@ -1,15 +1,12 @@
 <?php
-/**
- * @license https://raw.githubusercontent.com/andkirby/commithook/master/LICENSE.md
- */
-namespace PreCommit\Console;
+namespace Rikby\GitExt\Console;
 
-use PreCommit\Exception as TopException;
+use Rikby\GitExt\Exception as TopException;
 
 /**
  * Class Exception
  *
- * @package PreCommit\Command
+ * @package Rikby\GitExt\Console
  */
 class Exception extends TopException
 {
