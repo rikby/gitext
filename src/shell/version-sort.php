@@ -1,12 +1,11 @@
 <?php
+// @codingStandardsIgnoreFile
+
 /**
  * Sort versions list
- *
- * Add an alias in GIT
- *      $ git config --global alias.tags "!git tag | xargs -i -0 php ~/.version_sort.php {}"
  */
-
-use Naneau\SemVer\Sort;
+require_once __DIR__ . '/../../bin/autoload-init.php';
+//use Naneau\SemVer\Sort;
 
 try {
     if (php_sapi_name() != 'cli') {
@@ -26,11 +25,26 @@ try {
     $versions = preg_replace('#\+[^\n]+#', '', $versionsRaw); //Remove meta information after sign "+"
     $versions = explode("\n", $versions);
 
-    $sorted = Sort::sortArray($versions);
+    $originalVersions = [];
+    foreach ($versions as $key => $original) {
+        $normal = ltrim($original, 'v');
 
-//    array_walk($versions, 'trim');
-//    usort($versions, 'version_compare');
-    echo implode(PHP_EOL, $sorted);
+        $originalVersions[$normal] = $original;
+
+        $versions[$key] = $normal;
+    }
+
+    /**
+     * Cannot use naneau/semver to to a problem with patches
+     * @link https://github.com/naneau/semver/issues/24
+     */
+//    $versions = call_user_func_array(Sort::class . '::sort', $versions);
+
+    array_walk($originalVersions, 'trim');
+    usort($originalVersions, 'version_compare');
+    $versions = $originalVersions;
+
+    echo implode(PHP_EOL, $versions);
 } catch (Exception $e) {
     echo 'error: ' . $e->getMessage();
     exit(1);
