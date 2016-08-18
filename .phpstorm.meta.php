@@ -15,5 +15,15 @@ namespace PHPSTORM_META {
             'debug_formatter' instanceof \Symfony\Component\Console\Helper\DebugFormatterHelper,
             'descriptor' instanceof \Symfony\Component\Console\Helper\DescriptorHelper,
         ],
+        \Symfony\Component\Console\Helper\HelperSet::has('') => [
+            'php_bin_get' instanceof \SplBool,
+            'simple_question' instanceof \SplBool,
+            'git_dir_get' instanceof \SplBool,
+            'shell' instanceof \SplBool,
+            'question' instanceof \SplBool,
+            'process' instanceof \SplBool,
+            'debug_formatter' instanceof \SplBool,
+            'descriptor' instanceof \SplBool,
+        ],
     ];
 }
