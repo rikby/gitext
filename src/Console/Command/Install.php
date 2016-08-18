@@ -61,7 +61,7 @@ class Install extends AbstractCommand
         return [
             'git tags'       => sprintf(
                 trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tags'))),
-                str_replace('\\', '/', realpath(__DIR__.'/../../shell/version-sort.php'))
+                str_replace('\\', '/', realpath(__DIR__.'/../../../bin/gitext-sort-versions.php'))
             ),
             'git tag-move'   => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-move'))),
             'git tag-remove' => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-remove'))),
