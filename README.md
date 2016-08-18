@@ -15,7 +15,15 @@ Remove a Git tag locally and on remote "origin"
 ```
 git tag-move TAG
 ```
-Move a Git tag to a current commit locally and on remote "origin" (requires `git tag-remove`).
+##### GitFlow settings for multi composer repository
+```
+git flow-namespace
+```
+Define `gitflow` settings based upon branch namespace.
+
+This command will be useful within [multi composer repository](../../../andkirby/multi-repo-composer) repository.
+
+A namespace will be set automatically by branch name.
 ### Installation
 Get package via composer:
 ```
