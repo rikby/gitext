@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8b739660c4e22780fd55ed3e8d11670a",
-    "content-hash": "125baebf25c6866eaa591a171dd8e6ea",
+    "hash": "6814aa1f82415452dc5959e33b793e5a",
+    "content-hash": "572f1bdf6d7a915e58909ab41e54837d",
     "packages": [
         {
             "name": "andkirby/console-helper",
