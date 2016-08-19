@@ -14,6 +14,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Install extends AbstractCommand
 {
     /**
+     * Commands list for installation
+     *
+     * @var array
+     */
+    protected $commands;
+
+    /**
      * Execute command
      *
      * @param InputInterface  $input
@@ -58,18 +65,44 @@ class Install extends AbstractCommand
      */
     protected function getCommands()
     {
+        if (null === $this->commands) {
+            $this->commands = [
+                'git tags' => sprintf(
+                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tags'))),
+                    str_replace('\\', '/', realpath(__DIR__.'/../../../bin/gitext-sort-versions.php'))
+                ),
+
+                'git tag-move' => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-move'))),
+
+                'git tag-remove' => trim(
+                    file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-remove'))
+                ),
+
+                'git tag-up' => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-up'))),
+
+                'git flow-namespace' => sprintf(
+                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-flow-namespace'))),
+                    str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-flow-namespace-branch.sh'))
+                ),
+            ];
+        }
+
+        return $this->commands;
+    }
+
+    /**
+     * Get commands list help
+     *
+     * @return mixed
+     */
+    protected function getCommandsHelp()
+    {
         return [
-            'git tags'           => sprintf(
-                trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tags'))),
-                str_replace('\\', '/', realpath(__DIR__.'/../../../bin/gitext-sort-versions.php'))
-            ),
-            'git tag-move'       => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-move'))),
-            'git tag-remove'     => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-remove'))),
-            'git tag-up'         => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-up'))),
-            'git flow-namespace' => sprintf(
-                trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-flow-namespace'))),
-                str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-flow-namespace-branch.sh'))
-            ),
+            'git tags'           => 'Show tags sorted by version.',
+            'git tag-move'       => 'Move a tag to the current commit.',
+            'git tag-remove'     => 'Remove a tag from local and "origin" repository.',
+            'git tag-up'         => 'Move latest version tag to the last commit.',
+            'git flow-namespace' => 'Set GitFlow configuration by namespace in multi- composer repository.',
         ];
     }
 
@@ -91,18 +124,43 @@ class Install extends AbstractCommand
     protected function configureCommand()
     {
         $this->setName('install');
-// @codingStandardsIgnoreStart
+
+        // @codingStandardsIgnoreStart
         $this->setHelp(
             <<<TXT
-Install extra GIT commands. It will set
-  - git tags (Sorted tags by SemVer)
-  - git tag-move (Command which moves a tag to last commit. It will move it on "origin" as well)
-  - git tag-remove (Command which removes a tag to last commit. It will remove it on "origin" as well)
+Install extra GIT commands. It will set GIT commands:
+{$this->formatList($this->getCommandsHelp())}
 TXT
         );
-// @codingStandardsIgnoreEnd
+        // @codingStandardsIgnoreEnd
         $this->setDescription(
             'Install extra GIT commands.'
         );
+    }
+
+    /**
+     * Format list
+     *
+     * @param array $list
+     * @param int   $minIndent
+     * @return string
+     */
+    protected function formatList($list, $minIndent = 1)
+    {
+        $maxWidth = 0;
+        $result   = '';
+        foreach ($list as $command => $help) {
+            $maxWidth = strlen($command) > $maxWidth ? strlen($command) : $maxWidth;
+        }
+        foreach ($list as $command => $help) {
+            $result .= sprintf(
+                '  <info>%s</info>%s%s'.PHP_EOL,
+                $command,
+                str_repeat(' ', $maxWidth - strlen($command) + $minIndent),
+                $help
+            );
+        }
+
+        return $result;
     }
 }
