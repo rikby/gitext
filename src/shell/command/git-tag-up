@@ -1,1 +1,1 @@
-git config --global alias.tag-up '!git tag-move $(git tags | tail -1)'
+git config --global alias.tag-up "!git tag-move $(git tags | tail -1)"
