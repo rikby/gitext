@@ -65,6 +65,7 @@ class Install extends AbstractCommand
             ),
             'git tag-move'       => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-move'))),
             'git tag-remove'     => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-remove'))),
+            'git tag-up'         => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-up'))),
             'git flow-namespace' => sprintf(
                 trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-flow-namespace'))),
                 str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-flow-namespace-branch.sh'))
