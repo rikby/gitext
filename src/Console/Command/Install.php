@@ -65,6 +65,7 @@ class Install extends AbstractCommand
             ),
             'git tag-move'       => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-move'))),
             'git tag-remove'     => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-remove'))),
+            'git tag-semver'     => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-semver'))),
             'git flow-namespace' => sprintf(
                 trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-flow-namespace'))),
                 str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-flow-namespace-branch.sh'))
@@ -95,6 +96,7 @@ class Install extends AbstractCommand
             <<<TXT
 Install extra GIT commands. It will set
   - git tags (Sorted tags by SemVer)
+  - git tag-semver (Add SemVer tag with using SemVer options. semver must be installed)
   - git tag-move (Command which moves a tag to last commit. It will move it on "origin" as well)
   - git tag-remove (Command which removes a tag to last commit. It will remove it on "origin" as well)
 TXT
