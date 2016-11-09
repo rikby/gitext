@@ -96,7 +96,9 @@ class Install extends AbstractCommand
             <<<TXT
 Install extra GIT commands. It will set
   - git tags (Sorted tags by SemVer)
-  - git tag-semver (Add SemVer tag with using SemVer options. semver must be installed)
+  - git tag-semver 
+        Add new tag with using SemVer options. "semver" command must be installed.
+        See more by link https://github.com/npm/node-semver
   - git tag-move (Command which moves a tag to last commit. It will move it on "origin" as well)
   - git tag-remove (Command which removes a tag to last commit. It will remove it on "origin" as well)
 TXT
