@@ -19,7 +19,28 @@ There are commands:
 ```
 git tags
 ```
-Sorting Git tags according to [semantic versioning](semver.org).
+Sorting Git tags using PHP function [`version_compare()`](http://php.net/version_compare).
+
+##### Increment tag using `semver`
+[SemVer](https://github.com/npm/node-semver) must be installed.
+
+For example we need to add new build/pre-release
+```
+$ semver $(git tag)
+v1.0.1
+[...]
+v1.2.0-alpha.5
+
+$ git tag-semver --increment prerelease
+New tag: v1.2.0-alpha.1
+
+$ semver $(git tag)
+v1.0.1
+[...]
+v1.2.0-alpha.5
+v1.2.0-alpha.6
+```
+
 ##### Remove tag
 ```
 git tag-remove TAG
