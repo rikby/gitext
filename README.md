@@ -12,20 +12,19 @@ $ gitext install
 #### Inside
 Please take a look command files which use for installation [in list](src/shell/command).
 
-## Using
-### Commands list
-There are commands:
-##### Sort tags
-```
-git tags
+## Commands Using
+### Sort tags
+```shell
+$ git tags
 ```
 Sorting Git tags using PHP function [`version_compare()`](http://php.net/version_compare).
 
-##### Increment tag using `semver`
+### Increment tag using `semver`
 [SemVer](https://github.com/npm/node-semver) must be installed.
 
 For example we need to add new build/pre-release
-```
+```shell
+# show tag sorted by semver
 $ semver $(git tag)
 v1.0.1
 [...]
@@ -41,18 +40,18 @@ v1.2.0-alpha.5
 v1.2.0-alpha.6
 ```
 
-##### Remove tag
-```
-git tag-remove TAG
+### Remove tag
+```shell
+$ git tag-remove TAG
 ```
 Remove a Git tag locally and on remote "origin"
-##### Move tag
+### Move tag
+```shell
+$ git tag-move TAG
 ```
-git tag-move TAG
-```
-##### GitFlow settings for multi composer repository
-```
-git flow-namespace
+### GitFlow settings for multi composer repository
+```shell
+$ git flow-namespace
 ```
 Define `gitflow` settings based upon branch namespace.
 
