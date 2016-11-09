@@ -95,7 +95,7 @@ class Install extends AbstractCommand
         $this->setHelp(
             <<<TXT
 Install extra GIT commands. It will set
-  - git tags (Sorted tags by SemVer)
+  - git tags (Sort tags using PHP version_compare())
   - git tag-semver 
         Add new tag with using SemVer options. "semver" command must be installed.
         See more by link https://github.com/npm/node-semver
