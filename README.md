@@ -45,3 +45,9 @@ printf "#!""/usr/bin/env bash\n git flow-namespace $@" > $(git rev-parse --show-
 #!/usr/bin/env bash
 git flow-namespace $@
 ```
+
+### Environment variables
+
+- `GITEXT_SEMVER_BIN` - variable for custom path to `semver` binary file.
+- `GITEXT_GIT_BIN`    - variable for custom path to `git` binary file.
+- `GITEXT_PHP_BIN`    - variable for custom path to `php` binary file.

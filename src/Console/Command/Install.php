@@ -76,6 +76,16 @@ class Install extends AbstractCommand
                     trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-flow-namespace'))),
                     str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-flow-namespace-branch.sh'))
                 ),
+
+                'git tag-preminor-alpha' => sprintf(
+                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-preminor-alpha'))),
+                    str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-tag-preminor-alpha'))
+                ),
+
+                'git tag-prerelease' => sprintf(
+                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-prerelease'))),
+                    str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-tag-prerelease'))
+                ),
             ];
         }
 
@@ -90,8 +100,10 @@ class Install extends AbstractCommand
     protected function getCommandsHelp()
     {
         return [
-            'git tags'           => 'Show tags sorted by version.',
-            'git flow-namespace' => 'Set GitFlow configuration by namespace in multi- composer repository.',
+            'git tags'               => 'Show tags sorted by version.',
+            'git flow-namespace'     => 'Set GitFlow configuration by namespace in multi- composer repository.',
+            'git tag-prerelease'     => 'Create new SemVer PreRelease tag based upon the last one.',
+            'git tag-preminor-alpha' => 'Create new SemVer PreMinor Alpha tag based upon the last one.',
         ];
     }
 
