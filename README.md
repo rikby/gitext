@@ -24,15 +24,6 @@ Sorting Git tags according to [semantic versioning](semver.org).
 Actually it uses PHP function `version_compare()` but seem it works in the same way.
 
 There is no tag name validation.
-##### Remove tag
-```
-git tag-remove TAG
-```
-Remove a Git tag locally and on remote "origin"
-##### Move tag
-```
-git tag-move TAG
-```
 ##### GitFlow settings for multi composer repository
 ```
 git flow-namespace
