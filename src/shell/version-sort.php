@@ -11,19 +11,19 @@ try {
     if (php_sapi_name() != 'cli') {
         throw new Exception('This file can be run in CLI only.');
     }
-    if ($_SERVER['argc'] < 2) {
-        echo 'error: Invalid argument. Please set version/s as argument/s.';
+    //remove file from the args
+    $serverArgs = (array)$_SERVER['argv'];
+    array_shift($serverArgs);
+
+    if (!$serverArgs) {
+        echo 'error: No argument/s. Please set version/s as argument/s.';
         exit(1);
     }
 
-    if ($_SERVER['argc'] > 2) {
-        $versionsRaw = implode(' ', $_SERVER['argv']);
-    } else {
-        $versionsRaw = trim($_SERVER['argv'][1]);
-    }
+    $versionsRaw = implode(' ', $serverArgs);
 
     $versions = preg_replace('#\+[^\n]+#', '', $versionsRaw); //Remove meta information after sign "+"
-    $versions = explode("\n", $versions);
+    $versions = preg_split("(\n|\s)", $versions);
 
     $originalVersions = [];
     foreach ($versions as $key => $original) {
