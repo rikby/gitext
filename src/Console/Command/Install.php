@@ -72,14 +72,6 @@ class Install extends AbstractCommand
                     str_replace('\\', '/', realpath(__DIR__.'/../../../bin/gitext-sort-versions.php'))
                 ),
 
-                'git tag-move' => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-move'))),
-
-                'git tag-remove' => trim(
-                    file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-remove'))
-                ),
-
-                'git tag-up' => trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-up'))),
-
                 'git flow-namespace' => sprintf(
                     trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-flow-namespace'))),
                     str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-flow-namespace-branch.sh'))
@@ -99,9 +91,6 @@ class Install extends AbstractCommand
     {
         return [
             'git tags'           => 'Show tags sorted by version.',
-            'git tag-move'       => 'Move a tag to the current commit.',
-            'git tag-remove'     => 'Remove a tag from local and "origin" repository.',
-            'git tag-up'         => 'Move latest version tag to the last commit.',
             'git flow-namespace' => 'Set GitFlow configuration by namespace in multi- composer repository.',
         ];
     }
