@@ -1,1 +1,0 @@
-git config --global alias.tag-remove "!git show-ref --quiet --verify refs/tags/$1 && git tag -d $1; git push origin :refs/tags/$1 && echo > /dev/null"
