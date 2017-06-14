@@ -1,0 +1,1 @@
+git config --global alias.tag-semver '! set -o errexit && echo $(git tag | tail -1 | grep -Eo ^[^0-9])$(semver $@ $(semver $(git tag) | tail -1)) | xargs -i sh -c "git tag {} && echo New tag: {}"'

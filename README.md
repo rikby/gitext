@@ -12,12 +12,32 @@ $ gitext install
 #### Inside
 Please take a look command files which use for installation [in list](src/shell/command).
 
-## Using
-### Commands list
-There are commands:
-##### Sort tags
+## Commands Using
+### Sort tags
+```shell
+$ git tags
 ```
-git tags
+Sorting Git tags using PHP function [`version_compare()`](http://php.net/version_compare).
+
+### Increment tag using `semver`
+[SemVer](https://github.com/npm/node-semver) must be installed.
+
+For example we need to add new build/pre-release
+```shell
+# show tag sorted by semver
+$ semver $(git tag)
+v1.0.1
+[...]
+v1.2.0-alpha.5
+
+$ git tag-semver --increment prerelease
+New tag: v1.2.0-alpha.1
+
+$ semver $(git tag)
+v1.0.1
+[...]
+v1.2.0-alpha.5
+v1.2.0-alpha.6
 ```
 Sorting Git tags according to [semantic versioning](semver.org).
 
