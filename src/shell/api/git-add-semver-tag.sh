@@ -15,15 +15,12 @@ readonly __dir __file
 semver_bin=${GITEXT_SEMVER_BIN:-semver}
 
 if [ -z "${1:-}" ]; then
-  echo 'gitext error: Please define semver options in first argument.'
+  echo 'gitext error: Please define semver options in first argument.' > /dev/stderr
   exit 2
 fi
 
 semver_options=${1}
 point_tag=${2:-$(last_tag)}
 
-
-
-
-
-echo $(tag_prefix)$(create_semver_tag "${semver_options}" ${point_tag}) | xargs -i sh -c 'git tag {} && echo "New tag: {}"'
+echo $(tag_prefix)$(create_semver_tag "${semver_options}" ${point_tag}) \
+  | xargs -i sh -c 'git tag {} && echo "New tag: {}"'
