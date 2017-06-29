@@ -78,12 +78,12 @@ class Install extends AbstractCommand
                 ),
 
                 'git tag-preminor-alpha' => sprintf(
-                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-preminor-alpha'))),
+                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-preminor-alpha'))),
                     str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-tag-preminor-alpha'))
                 ),
 
                 'git tag-prerelease' => sprintf(
-                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-prerelease'))),
+                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-prerelease'))),
                     str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-tag-prerelease'))
                 ),
             ];
