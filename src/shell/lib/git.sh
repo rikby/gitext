@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# GIT API methods
+
+set -o pipefail
+set -o errexit
+set -o nounset
+#set -o xtrace
+
 tag_prefix() {
   ${GITEXT_GIT_BIN:-git} config gitext.tag-prefix 2> /dev/null || \
     ${GITEXT_GIT_BIN:-git} tag | tail -1 | grep -Eo ^[^0-9]
@@ -25,7 +32,6 @@ has_branch_error() {
   else
     err="No such branch '${branch}'."
   fi
-  local err=$
   if ! has_branch ${branch} ; then
     check_error 2 "${err}"
   fi
