@@ -14,6 +14,8 @@ check_error () {
   shift
   if [ '0' != "${status}" ]; then
     echo -e "${t_color_red}error${t_default}: ${@}" > /dev/stderr
-    exit ${status}
+  fi
+  if [ '-1' != "${status}" ] && [ '0' != "${status}" ]; then
+    return ${status}
   fi
 }
