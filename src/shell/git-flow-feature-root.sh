@@ -26,7 +26,7 @@ if [ -n "${namespace:-}" ]; then
 
   # Set git flow configuration
   git config gitflow.branch.develop    feature/${namespace}
-  git config gitflow.prefix.feature    feature/${namespace}/
+  git config gitflow.prefix.feature    feature/${namespace}-
   echo
   echo -e "  GitFlow Root Feature = ${t_color_yellow}${namespace}${t_default}"
 else
