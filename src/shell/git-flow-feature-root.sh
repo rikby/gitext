@@ -21,7 +21,7 @@ if [ -n "${namespace:-}" ]; then
   # It should be already created
   if ! git branch | tr '*' ' ' \
       | sed 's/^ *//;s/ *$//' | grep "feature/${namespace}"; then
-    check_error 2 "No such branch 'feature/${namespace}' to make it GitFlow Root Feature."
+    check_error 2 "No such branch 'feature/${namespace}' to define GitFlow Root Feature."
   fi
 
   # Set git flow configuration
