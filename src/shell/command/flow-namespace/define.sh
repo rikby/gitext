@@ -11,6 +11,20 @@ __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 readonly __dir __file
 
 . ${__dir}/../../lib/common.sh
+. ${__dir}/../../lib/git.sh
+
+check_flow_branches() {
+  local status
+  local error_message
+  error_message=$(cat <<EOF
+Please be sure following branches are created:
+  ${namespace_prefix}master
+  ${namespace_prefix}develop
+EOF
+)
+  has_branch_error ${namespace_prefix}master "${error_message}"
+  has_branch_error ${namespace_prefix}develop "${error_message}"
+}
 
 namespace_prefix=''
 namespace="${1:-}"
@@ -18,6 +32,8 @@ namespace="${1:-}"
 if [ -n "${namespace:-}" ]; then
   namespace_prefix="${namespace}/"
 fi
+
+check_flow_branches
 
 # Reset git flow configuration
 git config gitflow.branch.master     ${namespace_prefix}master
