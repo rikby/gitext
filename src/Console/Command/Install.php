@@ -69,12 +69,15 @@ class Install extends AbstractCommand
     {
         if (null === $this->commands) {
             $this->commands = [
-                'git flow-namespace'     => $this->makeAliasCommand('flow-namespace'),
-                'git tags'               => $this->makeAliasCommand('tags'),
-                'git tag-semver'         => $this->makeAliasCommand('tag-semver'),
-                'git tag-preminor-alpha' => $this->makeAliasCommand('tag-preminor-alpha'),
-                'git tag-prerelease'     => $this->makeAliasCommand('tag-prerelease'),
+                'git flow-namespace' => '',
+                'git tags' => '',
+                'git tag-semver' => '',
+                'git tag-preminor-alpha' => '',
+                'git tag-prerelease' => '',
             ];
+            foreach ($this->commands as $command => &$alias) {
+                $alias = $this->makeAliasCommand($command);
+            }
         }
 
         return $this->commands;
@@ -103,7 +106,8 @@ class Install extends AbstractCommand
     protected function getCommandsHelp()
     {
         return [
-            'git flow-namespace' => 'Set GitFlow configuration by namespace in multi- composer repository.',
+            'git flow-namespace'     => '',
+            'git flow-feature-root'  => '',
 
             'git tags'               => 'Show tags sorted by version.',
             'git tag-semver'         => 'Increase tag version through SemVer API.',
@@ -159,6 +163,14 @@ TXT
             $maxWidth = strlen($command) > $maxWidth ? strlen($command) : $maxWidth;
         }
         foreach ($list as $command => $help) {
+            if (!$help) {
+                # "3" is a default left indent
+                # "2" is an extra shift
+                $help = trim($this->getCommandDescription(
+                    $command,
+                    str_repeat(' ', $maxWidth + 3 + 2)
+                ));
+            }
             $result .= sprintf(
                 '  <info>%s</info>%s%s'.PHP_EOL,
                 $command,
@@ -179,17 +191,80 @@ TXT
      */
     protected function getCommandFile($command)
     {
-        $path = realpath(__DIR__.'/../../shell/git-'.$command.'.sh');
+        $command = str_replace(' ', '-', $command);
+        $path = realpath(__DIR__.'/../../shell/'.$command.'.sh');
         if (!$path) {
             throw new Exception(
                 sprintf(
                     'Could not found command "%s" by path "%s".',
                     $command,
-                    __DIR__.'/../../shell/git-'.$command.'.sh'
+                    __DIR__.'/../../shell/'.$command.'.sh'
                 )
             );
         }
 
         return $path;
+    }
+
+    /**
+     * Get command string
+     *
+     * @param string $command
+     * @return mixed
+     */
+    protected function getCommandString($command)
+    {
+        return $this->readCommandSingleMeta($command, 'CMD');
+    }
+
+    /**
+     * Get command description
+     *
+     * @param string $command
+     * @return string
+     */
+    protected function getCommandDescription($command, $indent = '')
+    {
+        return $indent . implode("\n$indent", $this->readCommandMeta($command, 'DESCR'));
+    }
+
+    /**
+     * Read command meta info
+     *
+     * @param string $command
+     * @param string $metaTag
+     * @return mixed
+     */
+    protected function readCommandMeta($command, $metaTag)
+    {
+        preg_match_all(
+            '~\#\s*'.$metaTag.':\s*(.+)~',
+            file_get_contents(
+                $this->getCommandFile($command)
+            ),
+            $matches
+        );
+
+        list(, $matches) = $matches;
+
+        return $matches;
+    }
+
+    /**
+     * Read command single meta info
+     *
+     * Get only first match.
+     *
+     * @param string $command
+     * @param string $metaTag
+     * @return mixed
+     */
+    protected function readCommandSingleMeta($command, $metaTag)
+    {
+        $matches = $this->readCommandMeta($command, $metaTag);
+
+        list(, $matches) = $matches;
+
+        return trim($matches);
     }
 }
