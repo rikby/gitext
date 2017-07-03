@@ -27,7 +27,7 @@ if [ -n "${namespace:-}" ]; then
 
   # Store config for recovery
   git config gitext.gitflow.branch.develop-default    $(git config gitflow.branch.develop)
-  git config gitext.gitflow.branch.feature-default    $(git config gitflow.branch.feature)
+  git config gitext.gitflow.prefix.feature-default    $(git config gitflow.prefix.feature)
   # Set git flow configuration
   git config gitflow.branch.develop    feature/${namespace}
   git config gitflow.prefix.feature    feature/${namespace}-
@@ -36,7 +36,7 @@ if [ -n "${namespace:-}" ]; then
 elif [ -n "$(git config gitext.gitflow.branch.develop-default)" ]; then
   # Set git flow configuration
   git config gitflow.branch.develop    $(git config gitext.gitflow.branch.develop-default)
-  git config gitflow.branch.feature    $(git config gitext.gitflow.branch.feature-default)
+  git config gitflow.prefix.feature    $(git config gitext.gitflow.prefix.feature-default)
   echo
   echo -e "  GitFlow Root Feature has been ${t_color_red}removed${t_default}."
 else
