@@ -88,3 +88,28 @@ check_flow_branches() {
 
   return ${status}
 }
+
+##
+# Check if GitFlow configuration is completely set
+#
+has_flow_config() {
+  local path \
+    paths=$(cat <<EOF
+gitflow.branch.master
+gitflow.branch.develop
+gitflow.prefix.feature
+gitflow.prefix.bugfix
+gitflow.prefix.release
+gitflow.prefix.hotfix
+gitflow.prefix.support
+gitflow.prefix.versiontag
+EOF
+)
+  echo -e "${paths}" | while read path; do
+    if ! git config ${path} > /dev/null; then
+      check_error -1 "GitFlow config '${path}' is not defined."
+      check_error 2 'Please init GitFlow configuration by command:'\
+"\n\n    git flow init"
+    fi
+  done
+}

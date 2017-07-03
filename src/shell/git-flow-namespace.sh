@@ -11,6 +11,9 @@ __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 readonly __dir __file
 
 . ${__dir}/lib/common.sh
+. ${__dir}/lib/git.sh
+
+has_flow_config
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 
