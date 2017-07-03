@@ -1,30 +1,40 @@
 #!/usr/bin/env bash
 
-t_color_red='\e[31m'
-t_color_yellow='\e[33m'
-t_default='\e[0m'
+set -o pipefail
+set -o errexit
+set -o nounset
+#set -o xtrace
 
-namespace_prefix=''
-namespace="${1:-}"
+# Set magic variables for current file & dir
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
+readonly __dir __file
 
-if [ -n "${namespace:-}" ]; then
-  namespace_prefix="${namespace}/"
+. ${__dir}/lib/common.sh
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+if [ -z "${branch}" ] || [ "${branch}" == 'HEAD' ]; then
+  # disable parsing asterisks, or set -f
+  set -o noglob
+
+  # get current branch
+  branch=$(git branch | grep '*' | grep -Eo '[A-z]+/[^)]+')
+
+  # enable parsing asterisks
+  set +o noglob
+
+  # Trim remote name
+  branch=$(echo "${branch}" | sed -r 's:^'$(git remote | xargs echo | tr ' ' '|')'::' | sed -r 's:^/::')
 fi
 
-# Reset git flow configuration
-git config gitflow.branch.master     ${namespace_prefix}master
-git config gitflow.branch.develop    ${namespace_prefix}develop
-git config gitflow.prefix.feature    ${namespace_prefix}feature/
-git config gitflow.prefix.bugfix     ${namespace_prefix}bugfix/
-git config gitflow.prefix.release    ${namespace_prefix}release/
-git config gitflow.prefix.hotfix     ${namespace_prefix}hotfix/
-git config gitflow.prefix.support    ${namespace_prefix}support/
-git config gitflow.prefix.versiontag ${namespace_prefix}v
-
-if [ -n "${namespace:-}" ]; then
-  echo
-  echo -e "  GitFlow namespace = ${t_color_yellow}${namespace}${t_default}"
-else
-  echo
-  echo -e "  GitFlow namespace ${t_color_red}removed${t_default}."
+switch_branch=''
+if [[ ${branch} =~ \/ ]]; then
+  IFS='/' read -ra branch <<< "${branch}"
+  for i in "${branch[@]}"; do
+    switch_branch=${i}
+    break
+  done
 fi
+
+bash "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"/command/flow-namespace/define.sh ${switch_branch}
