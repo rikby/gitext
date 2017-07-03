@@ -17,10 +17,7 @@ readonly __dir __file
 
 namespace="${1:-}"
 
-if [ -z "$(git config gitflow.branch.develop)" ]; then
-  check_error 2 'It looks like GitFlow is not initiated. Please use command '\
-"\n    git flow init"
-fi
+has_flow_config
 
 if [ -n "${namespace:-}" ]; then
   # Validate namespace
