@@ -5,7 +5,7 @@
         <type>github</type>
         <github>
             <name>rikby</name>
-            <repository>gitext</repository>
+            <project>gitext</project>
         </github>
     </tracker>
 </config>
