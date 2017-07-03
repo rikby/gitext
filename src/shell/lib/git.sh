@@ -22,12 +22,13 @@ all_tags() {
 
 has_branch() {
   git branch | tr '*' ' ' \
-    | sed 's/^ *//;s/ *$//' | grep "${1}"
+    | sed 's/^ *//;s/ *$//' | grep "${1}" > /dev/null
 }
 has_branch_error() {
-  local branch=${1}
+  local err \
+        branch=${1}
   shift
-  if [ -n "${@}" ]; then
+  if [[ -n "${@}" ]]; then
     err="${@}"
   else
     err="No such branch '${branch}'."
@@ -56,10 +57,34 @@ check_semver() {
     exit 127
   fi
 }
+
 check_version() {
   if ! ${GITEXT_SEMVER_BIN:-semver} ${1} 1> /dev/null; then
     check_semver
     echo 'gitext error: Tag "'${1}'" is not valid. Please check schema in semver.org.' > /dev/stderr
     exit 2
   fi
+}
+
+##
+# Check if git flow branches are initiated
+#
+# $ check_flow_branches [BRANCH_MASTER] [BRANCH_DEVELOP] [PREFIX]
+#
+check_flow_branches() {
+  local status=0 \
+    master=${1:-master} \
+    develop=${2:-develop}
+    namespace_prefix=${3:-}
+
+  if ! has_branch_error ${namespace_prefix}${master} \
+    "GitFlow branch '${namespace_prefix}${master}' is not created."; then
+    status=2
+  fi
+  if ! has_branch_error ${namespace_prefix}${develop} \
+    "GitFlow branch '${namespace_prefix}${develop}' is not created."; then
+    status=2
+  fi
+
+  return ${status}
 }
