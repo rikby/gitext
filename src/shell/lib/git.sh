@@ -13,6 +13,24 @@ all_tags() {
   fi
 }
 
+has_branch() {
+  git branch | tr '*' ' ' \
+    | sed 's/^ *//;s/ *$//' | grep "${1}"
+}
+has_branch_error() {
+  local branch=${1}
+  shift
+  if [ -n "${@}" ]; then
+    err="${@}"
+  else
+    err="No such branch '${branch}'."
+  fi
+  local err=$
+  if ! has_branch ${branch} ; then
+    check_error 2 "${err}"
+  fi
+}
+
 last_tag() {
   ${GITEXT_SEMVER_BIN:-semver} $(all_tags) | tail -1
 }
