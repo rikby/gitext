@@ -1,6 +1,0 @@
-git config --global alias.tag-semver \
-  '! set -o errexit; \
-  [ $# == 0 ] && semver && echo && echo "error: No arguments." > /dev/stderr && exit 1; \
-  echo $(git tag | tail -1 | grep -Eo ^[^0-9])$(semver $@ $(semver $(git tag) | tail -1)) \
-      | tr -d " " \
-      | xargs -i sh -c "git tag {} && echo New tag: {}"'

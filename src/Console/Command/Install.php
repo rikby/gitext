@@ -1,8 +1,10 @@
 <?php
+
 namespace Rikby\GitExt\Console\Command;
 
 use Rikby\Console\Command\AbstractCommand;
 use Rikby\Console\Helper\Shell\ShellHelper;
+use Rikby\GitExt\Console\Exception;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -67,34 +69,30 @@ class Install extends AbstractCommand
     {
         if (null === $this->commands) {
             $this->commands = [
-                'git tags' => sprintf(
-                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tags'))),
-                    str_replace('\\', '/', realpath(__DIR__.'/../../../bin/gitext-sort-versions.php'))
-                ),
-
-                'git flow-namespace' => sprintf(
-                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-flow-namespace'))),
-                    str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-flow-namespace-branch.sh'))
-                ),
-
-                'git tag-semver' => sprintf(
-                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-semver'))),
-                    str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-tag-semver-branch.sh'))
-                ),
-
-                'git tag-preminor-alpha' => sprintf(
-                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-preminor-alpha'))),
-                    str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-tag-preminor-alpha'))
-                ),
-
-                'git tag-prerelease' => sprintf(
-                    trim(file_get_contents(realpath(__DIR__.'/../../shell/command/git-tag-prerelease'))),
-                    str_replace('\\', '/', realpath(__DIR__.'/../../shell/git-tag-prerelease'))
-                ),
+                'git flow-namespace'     => $this->makeAliasCommand('flow-namespace'),
+                'git tags'               => $this->makeAliasCommand('tags'),
+                'git tag-semver'         => $this->makeAliasCommand('tag-semver'),
+                'git tag-preminor-alpha' => $this->makeAliasCommand('tag-preminor-alpha'),
+                'git tag-prerelease'     => $this->makeAliasCommand('tag-prerelease'),
             ];
         }
 
         return $this->commands;
+    }
+
+    /**
+     * Make alias command
+     *
+     * @param string $command
+     * @return string
+     */
+    protected function makeAliasCommand($command)
+    {
+        return sprintf(
+            'git config --global alias.%s "!bash %s"',
+            $command,
+            str_replace('\\', '/', $this->getCommandFile($command))
+        );
     }
 
     /**
@@ -105,7 +103,7 @@ class Install extends AbstractCommand
     protected function getCommandsHelp()
     {
         return [
-            'git flow-namespace'     => 'Set GitFlow configuration by namespace in multi- composer repository.',
+            'git flow-namespace' => 'Set GitFlow configuration by namespace in multi- composer repository.',
 
             'git tags'               => 'Show tags sorted by version.',
             'git tag-semver'         => 'Increase tag version through SemVer API.',
@@ -170,5 +168,28 @@ TXT
         }
 
         return $result;
+    }
+
+    /**
+     * Get path to command file
+     *
+     * @param string $command
+     * @return bool|string
+     * @throws Exception
+     */
+    protected function getCommandFile($command)
+    {
+        $path = realpath(__DIR__.'/../../shell/git-'.$command.'.sh');
+        if (!$path) {
+            throw new Exception(
+                sprintf(
+                    'Could not found command "%s" by path "%s".',
+                    $command,
+                    __DIR__.'/../../shell/git-'.$command.'.sh'
+                )
+            );
+        }
+
+        return $path;
     }
 }
