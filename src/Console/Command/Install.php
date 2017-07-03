@@ -64,17 +64,15 @@ class Install extends AbstractCommand
      * Get commands list
      *
      * @return mixed
+     * @todo Refactor getting commands list
      */
     protected function getCommands()
     {
         if (null === $this->commands) {
-            $this->commands = [
-                'git flow-namespace' => '',
-                'git tags' => '',
-                'git tag-semver' => '',
-                'git tag-preminor-alpha' => '',
-                'git tag-prerelease' => '',
-            ];
+            $this->commands = array_fill_keys(
+                array_keys($this->getCommandsHelp()),
+                ''
+            );
             foreach ($this->commands as $command => &$alias) {
                 $alias = $this->makeAliasCommand($command);
             }
@@ -91,9 +89,12 @@ class Install extends AbstractCommand
      */
     protected function makeAliasCommand($command)
     {
+        $alias = str_replace('git-', '', $command);
+        $alias = str_replace('git ', '', $alias);
+
         return sprintf(
             'git config --global alias.%s "!bash %s"',
-            $command,
+            $alias,
             str_replace('\\', '/', $this->getCommandFile($command))
         );
     }
@@ -164,8 +165,8 @@ TXT
         }
         foreach ($list as $command => $help) {
             if (!$help) {
-                # "3" is a default left indent
-                # "2" is an extra shift
+                // "3" is a default left indent
+                // "2" is an extra shift
                 $help = trim($this->getCommandDescription(
                     $command,
                     str_repeat(' ', $maxWidth + 3 + 2)
@@ -225,7 +226,7 @@ TXT
      */
     protected function getCommandDescription($command, $indent = '')
     {
-        return $indent . implode("\n$indent", $this->readCommandMeta($command, 'DESCR'));
+        return $indent.implode("\n$indent", $this->readCommandMeta($command, 'DESCR'));
     }
 
     /**
