@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Description: Set root feature branch. On "feature finish" your sub-feature branch will be merge into the root one.
+# DESCR: Set root feature branch. On "feature finish" your sub-feature branch will be merge into the root one.
 
 set -o pipefail
 set -o errexit
