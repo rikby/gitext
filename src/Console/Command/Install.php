@@ -68,9 +68,7 @@ class Install extends AbstractCommand
     public function commands()
     {
         if ($this->commands === null) {
-            $this->commands = new CommandsList([
-                __DIR__.'/../../shell/command',
-            ]);
+            $this->commands = new CommandsList($this->getCommandDirectories());
         }
 
         return $this->commands;
@@ -178,5 +176,26 @@ TXT
         }
 
         return $result;
+    }
+
+    /**
+     * Add reading git commands from user directory
+     *
+     * @return array
+     */
+    protected function getCommandDirectories()
+    {
+        $dirs = [
+            __DIR__.'/../../shell/command',
+        ];
+
+        // @codingStandardsIgnoreStart
+        if (is_dir($_SERVER['HOME'].'/.gitext')) {
+            $dirs[] = $_SERVER['HOME'].'/.gitext';
+        }
+
+        // @codingStandardsIgnoreEnd
+
+        return $dirs;
     }
 }
