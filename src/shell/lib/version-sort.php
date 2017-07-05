@@ -4,7 +4,7 @@
 /**
  * Sort versions list
  */
-require_once __DIR__ . '/../../bin/autoload-init.php';
+require_once __DIR__ . '/../../../bin/autoload-init.php';
 //use Naneau\SemVer\Sort;
 
 try {

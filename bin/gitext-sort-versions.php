@@ -1,2 +1,2 @@
 <?php
-require_once __DIR__.'/../src/shell/version-sort.php';
+require_once __DIR__.'/../src/shell/lib/version-sort.php';
