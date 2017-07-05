@@ -19,3 +19,11 @@ check_error () {
     return ${status}
   fi
 }
+
+show_warning() {
+  echo -e "${t_color_yellow}warning${t_default}: ${@}" > /dev/stderr
+}
+
+show_note() {
+  echo -e "note: ${@}"
+}
