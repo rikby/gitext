@@ -51,6 +51,24 @@ Sorting Git tags according to [semantic versioning](semver.org).
 Actually it uses PHP function `version_compare()` but seem it works in the same way.
 
 There is no tag name validation.
+##### GitFlow settings for super feature branch
+It can be used for using your "super" issue key in GitFlow.
+When you can start feature for a sub-task completely using git-flow.
+
+In this case "develop" is a "super" issue branch instead of "right" develop.
+
+So, there are two modes:
+  - DEFAULT
+```
+feature prefix = feature/
+develop branch = develop
+```
+  - ROOT FEATURE
+```
+feature prefix = feature/super-
+develop branch = feature/super
+```
+
 ##### GitFlow settings for multi composer repository
 ```
 git flow-namespace
