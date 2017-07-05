@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# DESCR: Show tags sorted by version.
+
 set -o pipefail
 set -o errexit
 set -o nounset
@@ -11,4 +14,4 @@ readonly __dir __file
 
 php_bin=${GITEXT_PHP_BIN:-php}
 git tag | grep -E "^${GITEXT_VERSION_PREFIX:-v}" \
-  | xargs -i -0 ${php_bin} ${__dir}/version-sort.php {}
+  | xargs -i -0 ${php_bin} ${__dir}/../lib/version-sort.php {}

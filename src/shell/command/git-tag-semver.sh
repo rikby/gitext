@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+# DESCR: Increase tag version through SemVer API.
+
 set -o pipefail
 set -o errexit
 set -o nounset
@@ -15,4 +18,4 @@ if [ $# == 0 ]; then
   exit 3
 fi
 
-bash ${__dir}/api/git-add-semver-tag.sh "${@}"
+bash ${__dir}/../api/git-add-semver-tag.sh "${@}"

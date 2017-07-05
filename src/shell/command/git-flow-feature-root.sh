@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-# DESCR: Set root feature branch. On "feature finish" your sub-feature branch will be merge into the root one.
+# CMD: git flow-feature-root
+# DESCR: Set root feature branch. On "feature finish" your sub-feature branch will be merged into the root one.
 
 set -o pipefail
 set -o errexit
@@ -12,8 +13,8 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 readonly __dir __file
 
-. ${__dir}/lib/common.sh
-. ${__dir}/lib/git.sh
+. ${__dir}/../lib/common.sh
+. ${__dir}/../lib/git.sh
 
 root_feature="${1:-}"
 

@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# CMD: git flow-namespace
+# DESCR: Set GitFlow namespace/prefix.
+# DESCR: E.g: Some/feature/, Some/master, Some/develop, etc.
+
 set -o pipefail
 set -o errexit
 set -o nounset
@@ -10,8 +14,8 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 readonly __dir __file
 
-. ${__dir}/lib/common.sh
-. ${__dir}/lib/git.sh
+. ${__dir}/../lib/common.sh
+. ${__dir}/../lib/git.sh
 
 has_flow_config
 
@@ -40,4 +44,4 @@ if [[ ${branch} =~ \/ ]]; then
   done
 fi
 
-bash "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P)"/command/flow-namespace/define.sh ${switch_branch}
+bash ${__dir}/flow-namespace/define.sh ${switch_branch}

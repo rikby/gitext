@@ -3,7 +3,8 @@
     "description": "",
     "license": "MIT",
     "require": {
-        "rikby/console-helper": "^0.9.0"
+        "rikby/console-helper": "^0.9.0",
+        "symfony/finder": "^3.3"
     },
     "require-dev": {
         "escapestudios/symfony2-coding-standard": "~2.0"
