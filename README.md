@@ -1,12 +1,12 @@
 # GitExt: Git extra commands
 
-## Intro
+# Intro
 This application helps to extend base GIT API.
 It extends:
 - `git flow`
 - `git tag`
 
-## Installation
+# Installation
 Get package via composer:
 ```
 $ composer global require rikby/gitext ^0.3
@@ -16,18 +16,20 @@ And install commands:
 $ gitext install
 ```
 
-#### Inside
+### Inside
 Please take a look command files which use for installation [in list](src/shell/command).
 
-## Commands Using
-### Sort tags
+# Commands Using
+## Sort tags
 ```shell
 $ git tags
 ```
 Sorting Git tags using PHP function [`version_compare()`](http://php.net/version_compare).
 
-### Increment tag using `semver`
+## Increment tag using `semver` tool
 [SemVer](https://github.com/npm/node-semver) must be installed.
+
+(You may try to use [this gist](https://gist.github.com/andkirby/3f65c5a6499739c842e25fb7f6d5e682) to make quick install `node`+`npm` in GitBash.)
 
 For example we need to add new build/pre-release
 ```shell
@@ -51,7 +53,7 @@ Sorting Git tags according to [semantic versioning](semver.org).
 Actually it uses PHP function `version_compare()` but seem it works in the same way.
 
 There is no tag name validation.
-##### GitFlow settings for super feature branch
+## GitFlow settings for super feature branch
 It can be used for using your "super" issue key in GitFlow.
 When you can start feature for a sub-task completely using git-flow.
 
@@ -69,7 +71,7 @@ feature prefix = feature/super-
 develop branch = feature/super
 ```
 
-##### GitFlow settings for multi composer repository
+## GitFlow settings for multi composer repository
 ```
 git flow-namespace
 ```
@@ -91,13 +93,13 @@ printf "#!""/usr/bin/env bash\n git flow-namespace $@" > $(git rev-parse --show-
 git flow-namespace $@
 ```
 
-### Environment variables
+# Environment variables
 
 - `GITEXT_SEMVER_BIN` - variable for custom path to `semver` binary file.
 - `GITEXT_GIT_BIN`    - variable for custom path to `git` binary file.
 - `GITEXT_PHP_BIN`    - variable for custom path to `php` binary file.
 
-### User GIT commands
+# User GIT commands
 You may create your own commands.
 Here is an example.
 
