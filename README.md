@@ -78,3 +78,32 @@ git flow-namespace $@
 - `GITEXT_SEMVER_BIN` - variable for custom path to `semver` binary file.
 - `GITEXT_GIT_BIN`    - variable for custom path to `git` binary file.
 - `GITEXT_PHP_BIN`    - variable for custom path to `php` binary file.
+
+### User GIT commands
+You may create your own commands.
+Here is an example.
+
+Create file `~/.gitext/git-hello-there.sh`:
+```shell
+#!/usr/bin/env bash
+
+# CMD: git hello-there
+# DESCR: Some test command.
+
+echo Hello there
+```
+
+Check it in commands list:
+```shell
+$ gitext install --help
+[...]
+   git hello-there        Some test command.
+```
+
+Install and test:
+```shell
+$ gitext install
+
+$ git hello-there
+Hello there
+```
