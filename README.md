@@ -108,6 +108,9 @@ Create file `~/.gitext/git-hello-there.sh`:
 # CMD: git hello-there
 # DESCR: Some test command.
 
+# you may include some file GitExt files
+# . $(gitext source)/shell/lib/git.sh
+
 echo Hello there
 ```
 
