@@ -1,4 +1,11 @@
 # GitExt: Git extra commands
+
+## Intro
+This application helps to extend base GIT API.
+It extends:
+- `git flow`
+- `git tag`
+
 ## Installation
 Get package via composer:
 ```
@@ -51,7 +58,7 @@ git flow-namespace
 
 Only for [multi composer repository](../../../../andkirby/multi-repo-composer) repository.
 
-Define `gitflow` settings based upon branch namespace.
+Define `GitFlow` settings based upon branch namespace.
 
 A namespace will be set automatically by branch name.
 
