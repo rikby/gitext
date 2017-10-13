@@ -9,7 +9,7 @@ It extends:
 # Installation
 Get package via composer:
 ```
-$ composer global require rikby/gitext ^0.3
+$ composer global require rikby/gitext ^0.10
 ```
 And install commands:
 ```
