@@ -7,13 +7,27 @@ It extends:
 - `git tag`
 
 # Installation
+## Installation by using global scope
 Get package via composer:
 ```
 $ composer global require rikby/gitext ^0.10
 ```
-And install commands:
+And install commands into your local `git`:
 ```
 $ gitext install
+```
+or
+```
+$ bash ~/.composer/vendor/bin/gitext install
+```
+
+## Installation through `create-project`
+```
+$ composer create-project rikby/gitext ./gitext ^0.10
+```
+And install commands into your local `git`:
+```
+$ php ./gitext/bin/gitext install
 ```
 
 ### Inside
